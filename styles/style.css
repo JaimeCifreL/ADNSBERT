@@ -1,0 +1,636 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            color: #1a1a1a;
+            margin: 0;
+            padding-top: 50px;
+        }
+
+        main {
+            width: 100%;
+        }
+
+        /* ===== SECCIÓN PORTADA ===== */
+        .hero {
+            position: relative;
+            max-width: 100%;
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #ffffff; /* fondo blanco pedido */
+        }
+
+        /* eliminar overlay opaco para dejar fondo totalmente blanco */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0); /* transparente */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* toque azul circular por bordes */
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0%;
+            z-index: 2;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at top left, rgba(0, 102, 204, 0.25) 0%, rgba(0, 102, 204, 0.10) 18%, transparent 35%),
+                radial-gradient(circle at top right, rgba(0, 102, 204, 0.22) 0%, rgba(0, 102, 204, 0.08) 18%, transparent 35%),
+                radial-gradient(circle at bottom left, rgba(0, 102, 204, 0.18) 0%, rgba(0, 102, 204, 0.06) 16%, transparent 32%),
+                radial-gradient(circle at bottom right, rgba(0, 102, 204, 0.20) 0%, rgba(0, 102, 204, 0.08) 18%, transparent 35%);
+            filter: blur(10px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: left; /* texto a la izquierda */
+            padding: 28px 30px;
+            width: min(560px, 48%);
+            margin-left: 6%;
+            background: rgba(11,44,95,0.08); /* sombreado azul sutil */
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(11,44,95,0.06);
+        }
+
+/* Canvas para animación de ADN */
+#dnaCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+    pointer-events: none;
+}
+
+        .hero-logo {
+            width: min(500px, 80vw);
+            max-width: 100%;
+            display: block;
+            margin: 0 auto 24px auto;
+        }
+
+        .hero-title {
+            font-size: clamp(1.6rem, 2.8vw, 2rem);
+            font-weight: 400; /* más minimalista */
+            color: #032245; /* azul oscuro, elegante */
+            letter-spacing: 0.2px;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* ===== BANDAS ===== */
+        .band-section {
+            height: 80px;
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .band-button {
+            width: 33.3333%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(135deg, #0b3d91, #1e64d1);
+            transition: transform 0.2s ease, filter 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; 
+        }
+
+        .band-button:hover {
+            filter: brightness(1.08);
+        }
+
+        .band-button:active {
+            transform: scale(0.98);
+        }
+
+        .band-image {
+            width: 66.6667%;
+            height: 100%;
+        }
+
+        .band-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* segunda banda invertida */
+        .band-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .band-section,
+            .band-section.reverse {
+                height: auto;
+                flex-direction: column;
+            }
+
+            .band-button,
+            .band-image {
+                width: 100%;
+            }
+
+            .band-button {
+                min-height: 70px;
+            }
+
+            .band-image {
+                height: 180px;
+            }
+        }
+        .top-band {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 4;
+
+    /* degradado izquierda transparente → derecha azul */
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 102, 204, 0.3) 40%,
+        rgba(0, 102, 204, 0.7) 70%,
+        rgba(0, 102, 204, 0.95) 100%
+    );
+}
+/* ===== ANIMACIÓN DE BANDAS ===== */
+.reveal-band {
+    position: relative;
+}
+
+.reveal-band .band-button,
+.reveal-band .band-image {
+    position: relative;
+    z-index: 1;
+}
+
+.band-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(135deg, #0b3d91, #1e64d1);
+    transform: translateX(0);
+    transition: transform 2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* primera banda: el azul se va hacia la izquierda */
+.reveal-left.is-visible .band-overlay {
+    transform: translateX(-100%);
+}
+
+/* segunda banda: el azul se va hacia la derecha */
+.reveal-right.is-visible .band-overlay {
+    transform: translateX(100%);
+}
+
+/* ===== SECCIÓN EMPRESA ===== */
+.company-section {
+    position: relative;
+    width: 100%;
+    padding: 55px 40px 70px 40px;
+    overflow: hidden;
+}
+
+.company-bg {
+    position: absolute;
+    inset: 0;
+    background: url("img/empresa/fondo.png") center/cover no-repeat;
+    z-index: 0;
+}
+.company-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.78);
+    z-index: 1;
+}
+.company-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at top left, rgba(0, 102, 204, 0.25) 0%, rgba(0, 102, 204, 0.10) 18%, transparent 35%),
+        radial-gradient(circle at top right, rgba(0, 102, 204, 0.22) 0%, rgba(0, 102, 204, 0.08) 18%, transparent 35%),
+        radial-gradient(circle at bottom left, rgba(0, 102, 204, 0.18) 0%, rgba(0, 102, 204, 0.06) 16%, transparent 32%),
+        radial-gradient(circle at bottom right, rgba(0, 102, 204, 0.20) 0%, rgba(0, 102, 204, 0.08) 18%, transparent 35%);
+    filter: blur(10px);
+}
+
+.company-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+}
+
+.company-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: #002079;
+    margin: 0 0 18px;
+    max-width: 980px;
+    position: relative;
+    padding-left: 18px;
+    text-transform: none;
+}
+
+/* línea en vez de barra */
+.company-title::before {
+    content: "|";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #2c6edb;
+    font-weight: 700;
+    transform: translateX(-6px);
+}
+
+/* Subtítulos estilo "canal denuncias" */
+.section-subtitle {
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+    font-weight: 600;
+    color: #000d31;
+    margin: 0 0 20px;
+    max-width: 980px;
+    letter-spacing: -0.02em;
+}
+
+/* 4 columnas exactas */
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    align-items: start;
+}
+
+.partner-item {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.partner-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(11, 44, 95, 0.15);
+}
+
+.partner-name {
+    font-size: clamp(1.3rem, 1.5vw, 1.6rem);
+    font-weight: 400;
+    color: #111;
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+/* 🔹 línea más fina y elegante */
+.partner-line {
+    width: 120px;
+    height: 2px;
+    background: #2c6edb;
+    margin-bottom: 12px;
+}
+
+/* 🔹 TEXTO MÁS PEQUEÑO Y LIMPIO */
+.partner-role {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #6f7680;
+    max-width: 240px;
+}
+
+/* ===== BANDA EMPRESA ===== */
+.company-band {
+    width: 100%;
+    background: linear-gradient(135deg, #114aad, #1e64d1);
+    padding: 10px 10px;
+}
+
+.company-band-content {
+    max-width: 950px;
+    margin: 0 auto;
+    text-align: justify;
+    color: white;
+    font-size: clamp(0.6rem, 1.7vw, 1.2rem);
+    line-height: 1.8;
+    font-weight: 400;
+    white-space: pre-line;
+}
+
+/* ===== MIEMBROS DE ===== */
+.member-section {
+    background: #ffffff;
+    padding: 60px 20px 80px 20px;
+}
+
+.member-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.member-title {
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    color: #0b2c5f;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.member-logo {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .partner-photo {
+        max-width: 300px;
+        height: 270px;
+    }
+}
+
+@media (max-width: 768px) {
+    .company-section {
+        padding: 45px 20px 55px 20px;
+    }
+
+    .company-title {
+        font-size: clamp(2.2rem, 9vw, 3.2rem);
+        margin-bottom: 35px;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .company-title::before {
+        left: 50%;
+        transform: translateX(-50%);
+        top: -6px;
+    }
+
+    .partners-grid {
+        grid-template-columns: 1fr;
+        gap: 38px;
+    }
+
+    .partner-photo {
+        max-width: 100%;
+        height: 280px;
+    }
+
+    .partner-role {
+        max-width: 100%;
+    }
+
+    .company-band {
+        padding: 35px 15px;
+    }
+
+    .member-section {
+        padding: 45px 15px 60px 15px;
+    }
+}
+
+/* ===== ANIMACIONES DE APARICIÓN ===== */
+.reveal-up,
+.reveal-fade,
+.reveal-scale {
+    opacity: 0;
+    transition: opacity 0.9s ease, transform 0.9s ease;
+    will-change: opacity, transform;
+}
+
+.reveal-up {
+    transform: translateY(35px);
+}
+
+.reveal-fade {
+    transform: translateY(12px);
+}
+
+.reveal-scale {
+    transform: translateY(20px) scale(0.96);
+}
+
+/* estado visible */
+.reveal-up.is-visible,
+.reveal-fade.is-visible,
+.reveal-scale.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* retrasos escalonados */
+.delay-1 {
+    transition-delay: 0.08s;
+}
+
+.delay-2 {
+    transition-delay: 0.18s;
+}
+
+.delay-3 {
+    transition-delay: 0.28s;
+}
+
+.delay-4 {
+    transition-delay: 0.38s;
+}
+
+.partner-photo {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        opacity 0.9s ease;
+}
+
+/* accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .reveal-up,
+    .reveal-fade,
+    .reveal-scale,
+    .delay-1,
+    .delay-2,
+    .delay-3,
+    .delay-4 {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ===== MOBILE-SPECIFIC IMPROVEMENTS (no cambios en pantallas medianas/grandes) ===== */
+@media (max-width: 768px) {
+    /* body spacing and readable font sizes */
+    body {
+        padding-top: 115px; /* keep header visible space and add extra margin for mobile */
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    /* Hero: compact but still visual */
+    .hero {
+        min-height: 62vh;
+        background-position: center top;
+        padding: 28px 12px;
+    }
+
+    .hero-content {
+        padding: 20px 12px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+        padding: 0 6px;
+    }
+
+    .hero-logo {
+        width: min(320px, 72vw);
+        margin-bottom: 18px;
+    }
+
+    /* Bands: ensure large tap targets */
+    .band-button {
+        width: 100%;
+        min-height: 64px;
+        font-size: 1.05rem;
+        border-radius: 8px;
+    }
+
+    .band-image {
+        width: 100%;
+        height: 180px;
+    }
+
+    /* Company section spacing */
+    .company-section {
+        padding: 30px 18px 36px 18px;
+    }
+
+    .company-title {
+        margin-left: 0;
+        padding-left: 0;
+        font-size: clamp(1.6rem, 6.5vw, 2.2rem);
+        text-align: center;
+    }
+
+    .company-title::before {
+        left: 50%;
+        transform: translateX(-50%);
+        top: -6px;
+    }
+
+    /* Partners grid already becomes single column; ensure images are full width */
+    /* Convert partners list into a horizontal, touch-friendly carousel */
+    .partners-grid {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding: 8px 6px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+
+    .partner-item {
+        flex: 0 0 82%;
+        max-width: 360px;
+        min-width: 240px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background: #ffffff;
+        padding: 12px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(11,44,95,0.08);
+        scroll-snap-align: start;
+    }
+
+    .partner-photo {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        object-position: top center; /* show top part of image when cropped on mobile */
+        border-radius: 12px; /* rectangular with rounded corners */
+        display: block;
+        margin: 0 0 12px 0;
+        box-shadow: 0 8px 18px rgba(11, 44, 95, 0.12);
+    }
+
+    .partner-name {
+        margin-bottom: 8px;
+    }
+
+    .partner-line {
+        width: 56px;
+        height: 2px;
+        margin-bottom: 10px;
+    }
+
+    /* Company band readability */
+    .company-band-content {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Member section spacing */
+    .member-section {
+        padding: 28px 14px 40px 14px;
+    }
+
+    /* Make partner role text slightly larger for legibility */
+    .partner-role {
+        font-size: 0.95rem;
+    }
+
+    /* Reveal animation: shorter distance on small screens */
+    .reveal-up { transform: translateY(18px); }
+    .reveal-fade { transform: translateY(8px); }
+
+    /* Global utility: clickable block links in lists */
+    .footer-services li a,
+    .footer-legal-links a {
+        display: inline-block;
+        padding: 8px 6px;
+        border-radius: 6px;
+    }
+}

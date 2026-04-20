@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/header_footer.css">
+    <link rel="stylesheet" href="styles/css.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Empresa</title>
+</head>
+<body>
+<div id="header"></div>
+
+<main>
+    <section class="story-switch-section">
+        <div class="story-switch-container reveal-fade">
+
+            <div class="story-panel story-panel-about is-active" id="aboutPanel">
+                <div class="story-panel-inner story-panel-inner-about">
+                    <div class="about-split-layout">
+                        <div class="about-copy">
+                            <h2 class="section-title about-title">Nuestra Firma</h2>
+
+                            <p class="about-lead">
+                                Una extensa trayectoria comprometidos en ofrecer la máxima calidad a nuestros clientes.
+                            </p>
+
+                            <p class="about-text">
+                                ADN SBERT AUDIT dispone de un gran número de profesionales con amplia experiencia en auditoría y consultoría, comprometidos con un servicio cercano, riguroso y orientado a la excelencia.
+                            </p>
+
+                            <p class="about-text">
+                                Nuestra forma de trabajar combina criterio técnico, proximidad y una clara orientación a las necesidades reales de cada cliente, manteniendo siempre los más altos estándares de calidad profesional.
+                            </p>
+                        </div>
+
+                        <div class="about-visual about-visual-metrics">
+                            <div class="about-info-panel">
+                                <div class="about-info-item">
+                                    <span class="about-info-number">+35</span>
+                                    <span class="about-info-label">años de experiencia</span>
+                                </div>
+
+                                <div class="about-info-item">
+                                    <span class="about-info-number">Auditoría</span>
+                                    <span class="about-info-label">rigor y criterio profesional</span>
+                                </div>
+
+                                <div class="about-info-item">
+                                    <span class="about-info-number">Consultoría</span>
+                                    <span class="about-info-label">visión práctica y cercana</span>
+                                </div>
+
+                                <div class="about-info-item">
+                                    <span class="about-info-number">Confianza</span>
+                                    <span class="about-info-label">compromiso con cada cliente</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="story-toggle-btn" id="storyToggleBtn" type="button">
+                    Mira nuestra trayectoria
+                </button>
+            </div>
+
+            <div class="story-panel story-panel-timeline" id="timelinePanel">
+                <div class="story-panel-inner">
+                    <div class="section-heading story-heading">
+                        <h2 class="section-title">Historia de la Firma</h2>
+                    </div>
+
+                    <div class="timeline-scroll-wrapper">
+                        <div class="timeline-track" id="timelineTrack"></div>
+                    </div>
+
+                    <!-- Flechas fijas (fuera del contenedor scrollable) -->
+                    <button class="timeline-arrow timeline-arrow--left" aria-label="Desplazar a la izquierda" type="button">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <button class="timeline-arrow timeline-arrow--right" aria-label="Desplazar a la derecha" type="button">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <button class="story-toggle-btn is-back" id="storyBackBtn" type="button">
+                    Quiénes somos
+                </button>
+            </div>
+
+        </div>
+    </section>
+    <section class="company-section">
+        <div class="company-bg"></div>
+
+        <div class="company-container">
+            <div class="section-heading section-heading-left about-heading reveal-fade">
+                <h1 class="section-title section-title-left">Nuestros Profesionales</h1>
+            </div>
+            <div class="section-description reveal-fade">
+                <p>
+                    Disponemos de una amplia plantilla altamente cualificada y con una gran experiencia en los ámbitos de la auditoría, consultoría e informática.
+                </p>
+            </div>
+
+            <div class="partners-grid" id="partnersGrid"></div>
+        </div>
+    </section>
+
+    <section class="member-section reveal-scale">
+        <div class="section-heading">
+            <h2 class="section-title" style="font-size:larger;">Miembros de</h2>
+        </div>
+
+        <div class="member-container">
+            <a href="https://adngrm.com/" target="_blank" rel="noopener noreferrer">
+                <img src="styles/img/Audit_positivo.jpg" alt="Logo ADNGRM" class="member-logo">
+            </a>
+        </div>
+    </section>
+</main>
+
+<div id="footer"></div>
+
+<script src="js/include.js"></script>
+<script src="js/header.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const animatedItems = document.querySelectorAll(".reveal-up, .reveal-fade, .reveal-scale");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.18
+    });
+
+    animatedItems.forEach((item) => {
+        revealObserver.observe(item);
+    });
+
+    const aboutPanel = document.getElementById("aboutPanel");
+    const timelinePanel = document.getElementById("timelinePanel");
+    const storyToggleBtn = document.getElementById("storyToggleBtn");
+    const storyBackBtn = document.getElementById("storyBackBtn");
+
+    const aboutSlides = Array.from(document.querySelectorAll(".about-partner-slide"));
+    let aboutSlideIndex = 0;
+    let aboutSliderInterval = null;
+
+    function showAboutSlide(index) {
+        aboutSlides.forEach((slide, i) => {
+            slide.classList.toggle("is-active", i === index);
+        });
+    }
+
+    function startAboutSlider() {
+        if (!aboutSlides.length) return;
+
+        stopAboutSlider();
+        aboutSliderInterval = setInterval(() => {
+            aboutSlideIndex = (aboutSlideIndex + 1) % aboutSlides.length;
+            showAboutSlide(aboutSlideIndex);
+        }, 4800);
+    }
+
+    function stopAboutSlider() {
+        if (aboutSliderInterval) {
+            clearInterval(aboutSliderInterval);
+            aboutSliderInterval = null;
+        }
+    }
+
+    const timelineTrack = document.getElementById("timelineTrack");
+    const timelineWrapper = document.querySelector(".timeline-scroll-wrapper");
+    let updateTimelineItems = null;
+
+    if (timelineTrack && timelineWrapper) {
+        fetch("js/timeline.json")
+            .then(response => response.json())
+            .then(events => {
+                timelineTrack.innerHTML = events.map((event) => `
+                    <article class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-year">${event.year}</span>
+                            <p class="timeline-text">${event.text}</p>
+                        </div>
+                    </article>
+                `).join("");
+
+                const timelineItems = Array.from(timelineTrack.querySelectorAll(".timeline-item"));
+
+                updateTimelineItems = function () {
+                    const wrapperRect = timelineWrapper.getBoundingClientRect();
+                    const visibleStart = wrapperRect.left + wrapperRect.width * 0.10;
+                    const visibleEnd = wrapperRect.left + wrapperRect.width * 0.90;
+                    const visibleCenter = wrapperRect.left + wrapperRect.width / 2;
+                    const halfVisibleRange = (visibleEnd - visibleStart) / 2;
+
+                    timelineItems.forEach((item) => {
+                        const itemRect = item.getBoundingClientRect();
+                        const itemCenter = itemRect.left + itemRect.width / 2;
+                        const isInside = itemCenter >= visibleStart && itemCenter <= visibleEnd;
+
+                        if (isInside) {
+                            item.classList.add("is-visible");
+                        } else {
+                            item.classList.remove("is-visible");
+                            item.classList.remove("is-focus");
+                            item.style.opacity = "";
+                            item.style.transform = "";
+                            item.style.filter = "";
+                            return;
+                        }
+
+                        const distanceToCenter = Math.abs(itemCenter - visibleCenter);
+                        const proximity = Math.max(0, 1 - (distanceToCenter / halfVisibleRange));
+
+                        const scale = 0.92 + (proximity * 0.12);
+                        const opacity = 0.45 + (proximity * 0.55);
+                        let blur = 0;
+
+                        if (proximity < 0.25) {
+                            const edgeFactor = (0.25 - proximity) / 0.25;
+                            blur = edgeFactor * 0.5;
+                        }
+
+                        item.style.opacity = opacity.toFixed(3);
+                        item.style.transform = `scale(${scale.toFixed(3)})`;
+                        item.style.filter = `blur(${Math.max(0, blur).toFixed(2)}px)`;
+
+                        if (proximity > 0.72) {
+                            item.classList.add("is-focus");
+                        } else {
+                            item.classList.remove("is-focus");
+                        }
+                    });
+                };
+
+                updateTimelineItems();
+
+                timelineWrapper.addEventListener("scroll", updateTimelineItems);
+                window.addEventListener("resize", updateTimelineItems);
+
+                timelineWrapper.addEventListener("wheel", function (e) {
+                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                        e.preventDefault();
+                        timelineWrapper.scrollLeft += e.deltaY;
+                    }
+                }, { passive: false });
+
+                // Arrows control (desktop): enable/disable and scroll behaviour
+                const panelInner = timelineWrapper.closest('.story-panel-inner') || document;
+                const leftArrow = panelInner.querySelector('.timeline-arrow--left');
+                const rightArrow = panelInner.querySelector('.timeline-arrow--right');
+
+                function updateArrows() {
+                    if (!leftArrow || !rightArrow) return;
+                    leftArrow.disabled = timelineWrapper.scrollLeft <= 0;
+                    rightArrow.disabled = timelineWrapper.scrollLeft + timelineWrapper.clientWidth >= timelineTrack.scrollWidth - 1;
+                }
+
+                if (leftArrow && rightArrow) {
+                    leftArrow.addEventListener('click', () => {
+                        timelineWrapper.scrollBy({ left: -Math.round(timelineWrapper.clientWidth * 0.6), behavior: 'smooth' });
+                    });
+
+                    rightArrow.addEventListener('click', () => {
+                        timelineWrapper.scrollBy({ left: Math.round(timelineWrapper.clientWidth * 0.6), behavior: 'smooth' });
+                    });
+
+                    timelineWrapper.addEventListener('scroll', updateArrows);
+                    window.addEventListener('resize', updateArrows);
+                    setTimeout(updateArrows, 260);
+                }
+            })
+            .catch(error => {
+                console.error("Error cargando timeline.json:", error);
+            });
+    }
+
+    function showAboutPanel() {
+        if (aboutPanel) aboutPanel.classList.add("is-active");
+        if (timelinePanel) timelinePanel.classList.remove("is-active");
+        startAboutSlider();
+    }
+
+    function showTimelinePanel() {
+        if (aboutPanel) aboutPanel.classList.remove("is-active");
+        if (timelinePanel) timelinePanel.classList.add("is-active");
+        stopAboutSlider();
+
+        setTimeout(() => {
+            if (typeof updateTimelineItems === "function") {
+                updateTimelineItems();
+            }
+        }, 220);
+    }
+
+    if (storyToggleBtn) {
+        storyToggleBtn.addEventListener("click", showTimelinePanel);
+    }
+
+    if (storyBackBtn) {
+        storyBackBtn.addEventListener("click", showAboutPanel);
+    }
+
+    showAboutSlide(0);
+    showAboutPanel();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const animatedItems = document.querySelectorAll(".reveal-up, .reveal-fade, .reveal-scale");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.18
+    });
+
+    animatedItems.forEach((item) => {
+        revealObserver.observe(item);
+    });
+
+    const aboutPanel = document.getElementById("aboutPanel");
+    const timelinePanel = document.getElementById("timelinePanel");
+    const storyToggleBtn = document.getElementById("storyToggleBtn");
+    const storyBackBtn = document.getElementById("storyBackBtn");
+    const aboutPartnerStage = document.getElementById("aboutPartnerStage");
+    const partnersGrid = document.getElementById("partnersGrid");
+
+    let aboutSlides = [];
+    let aboutSlideIndex = 0;
+    let aboutSliderInterval = null;
+
+    function showAboutSlide(index) {
+        aboutSlides.forEach((slide, i) => {
+            slide.classList.toggle("is-active", i === index);
+        });
+    }
+
+    function startAboutSlider() {
+        if (!aboutSlides.length || aboutSlides.length === 1) return;
+
+        stopAboutSlider();
+        aboutSliderInterval = setInterval(() => {
+            aboutSlideIndex = (aboutSlideIndex + 1) % aboutSlides.length;
+            showAboutSlide(aboutSlideIndex);
+        }, 4800);
+    }
+
+    function stopAboutSlider() {
+        if (aboutSliderInterval) {
+            clearInterval(aboutSliderInterval);
+            aboutSliderInterval = null;
+        }
+    }
+
+    function buildAboutSlides(partners) {
+        if (!aboutPartnerStage) return;
+
+        aboutPartnerStage.innerHTML = partners.map((partner, index) => `
+            <article class="about-partner-slide ${index === 0 ? "is-active" : ""}">
+                <img src="${partner.image}" alt="${partner.alt || partner.name}" class="about-partner-photo">
+                <div class="about-partner-tag">
+                    <span class="about-partner-name">${partner.name}</span>
+                </div>
+            </article>
+        `).join("");
+
+        aboutSlides = Array.from(document.querySelectorAll(".about-partner-slide"));
+        aboutSlideIndex = 0;
+        showAboutSlide(0);
+    }
+
+    function buildPartnerCards(partners) {
+        if (!partnersGrid) return;
+
+        partnersGrid.innerHTML = partners.map((partner, index) => {
+            const delayClass = `delay-${(index % 4) + 1}`;
+
+            return `
+                <article class="partner-item reveal-up ${delayClass}">
+                    <img src="${partner.image}" alt="${partner.alt || partner.name}" class="partner-photo">
+                    <div class="partner-info">
+                        <h3 class="partner-name">${partner.name}</h3>
+                        <div class="partner-line"></div>
+                        <p class="partner-role">${partner.role}</p>
+                    </div>
+                </article>
+            `;
+        }).join("");
+
+        const newAnimatedItems = partnersGrid.querySelectorAll(".reveal-up, .reveal-fade, .reveal-scale");
+        newAnimatedItems.forEach((item) => revealObserver.observe(item));
+    }
+
+    async function loadPartners() {
+        try {
+            const response = await fetch("js/partners.json");
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const partners = await response.json();
+
+            if (!Array.isArray(partners) || !partners.length) {
+                console.warn("partners.json está vacío o no es un array válido.");
+                return;
+            }
+
+            buildAboutSlides(partners);
+            buildPartnerCards(partners);
+            startAboutSlider();
+        } catch (error) {
+            console.error("Error cargando partners.json:", error);
+        }
+    }
+
+    const timelineTrack = document.getElementById("timelineTrack");
+    const timelineWrapper = document.querySelector(".timeline-scroll-wrapper");
+    let updateTimelineItems = null;
+
+    if (timelineTrack && timelineWrapper) {
+        fetch("js/timeline.json")
+            .then(response => response.json())
+            .then(events => {
+                timelineTrack.innerHTML = events.map((event) => `
+                    <article class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-year">${event.year}</span>
+                            <p class="timeline-text">${event.text}</p>
+                        </div>
+                    </article>
+                `).join("");
+
+                const timelineItems = Array.from(timelineTrack.querySelectorAll(".timeline-item"));
+
+                updateTimelineItems = function () {
+                    const wrapperRect = timelineWrapper.getBoundingClientRect();
+                    const visibleStart = wrapperRect.left + wrapperRect.width * 0.10;
+                    const visibleEnd = wrapperRect.left + wrapperRect.width * 0.90;
+                    const visibleCenter = wrapperRect.left + wrapperRect.width / 2;
+                    const halfVisibleRange = (visibleEnd - visibleStart) / 2;
+
+                    timelineItems.forEach((item) => {
+                        const itemRect = item.getBoundingClientRect();
+                        const itemCenter = itemRect.left + itemRect.width / 2;
+                        const isInside = itemCenter >= visibleStart && itemCenter <= visibleEnd;
+
+                        if (isInside) {
+                            item.classList.add("is-visible");
+                        } else {
+                            item.classList.remove("is-visible");
+                            item.classList.remove("is-focus");
+                            item.style.opacity = "";
+                            item.style.transform = "";
+                            item.style.filter = "";
+                            return;
+                        }
+
+                        const distanceToCenter = Math.abs(itemCenter - visibleCenter);
+                        const proximity = Math.max(0, 1 - (distanceToCenter / halfVisibleRange));
+
+                        const scale = 0.92 + (proximity * 0.12);
+                        const opacity = 0.45 + (proximity * 0.55);
+                        let blur = 0;
+
+                        if (proximity < 0.25) {
+                            const edgeFactor = (0.25 - proximity) / 0.25;
+                            blur = edgeFactor * 0.5;
+                        }
+
+                        item.style.opacity = opacity.toFixed(3);
+                        item.style.transform = `scale(${scale.toFixed(3)})`;
+                        item.style.filter = `blur(${Math.max(0, blur).toFixed(2)}px)`;
+
+                        if (proximity > 0.72) {
+                            item.classList.add("is-focus");
+                        } else {
+                            item.classList.remove("is-focus");
+                        }
+                    });
+                };
+
+                updateTimelineItems();
+
+                timelineWrapper.addEventListener("scroll", updateTimelineItems);
+                window.addEventListener("resize", updateTimelineItems);
+
+                timelineWrapper.addEventListener("wheel", function (e) {
+                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                        e.preventDefault();
+                        timelineWrapper.scrollLeft += e.deltaY;
+                    }
+                }, { passive: false });
+            })
+            .catch(error => {
+                console.error("Error cargando timeline.json:", error);
+            });
+    }
+
+    function showAboutPanel() {
+        if (aboutPanel) aboutPanel.classList.add("is-active");
+        if (timelinePanel) timelinePanel.classList.remove("is-active");
+        startAboutSlider();
+    }
+
+    function showTimelinePanel() {
+        if (aboutPanel) aboutPanel.classList.remove("is-active");
+        if (timelinePanel) timelinePanel.classList.add("is-active");
+        stopAboutSlider();
+
+        setTimeout(() => {
+            if (typeof updateTimelineItems === "function") {
+                updateTimelineItems();
+            }
+        }, 220);
+    }
+
+    if (storyToggleBtn) {
+        storyToggleBtn.addEventListener("click", showTimelinePanel);
+    }
+
+    if (storyBackBtn) {
+        storyBackBtn.addEventListener("click", showAboutPanel);
+    }
+
+    loadPartners();
+});
+</script>
+</body>
+</html>

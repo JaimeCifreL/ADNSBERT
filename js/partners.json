@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Antonio Mª Sbert Muntaner",
+    "image": "styles/img/empresa/Toni-Sbert.jpg",
+    "role": "Licenciado en Ciencias Económicas y Empresariales y Auditor de Cuentas inscrito en el ROAC 16343",
+    "alt": "Antonio Mª Sbert Muntaner"
+  },
+  {
+    "name": "Jaume Riutort Crespí",
+    "image": "styles/img/empresa/Jaume-Riutort.jpg",
+    "role": "Licenciado en Ciencias Económicas y Empresariales y Auditor de Cuentas inscrito en el ROAC 16313",
+    "alt": "Jaume Riutort Crespí"
+  },
+  {
+    "name": "Xavier Sánchez Ibáñez",
+    "image": "styles/img/empresa/Xavier-Sanchez.jpg",
+    "role": "Licenciado en Ciencias Económicas y Empresariales y Auditor de Cuentas inscrito en el ROAC 22451",
+    "alt": "Xavier Sánchez Ibáñez"
+  },
+  {
+    "name": "Miquel Ferrer Ferrer",
+    "image": "styles/img/empresa/Miquel-Ferrer.jpg",
+    "role": "Licenciado en Ciencias Económicas y Empresariales y Auditor de Cuentas inscrito en el ROAC 22450",
+    "alt": "Miquel Ferrer Ferrer"
+  }
+]

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/header_footer.css">
+    <link rel="stylesheet" href="styles/css.css">
+    <title>ADNSbert</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main>
+    <!-- SECCIÓN 1 -->
+
+    <section class="hero hero-sequence">
+    <div class="top-band"></div>
+    <canvas id="dnaCanvas" aria-hidden="true"></canvas>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-sequence-content">
+        <div class="hero-sequence-track" id="heroSequenceTrack">
+            <div class="hero-sequence-step is-active" data-step="0">
+                <p class="hero-sequence-kicker">ADN SBERT AUDIT</p>
+                <h1 class="hero-sequence-title">En nuestro ADN está la calidad</h1>
+            </div>
+
+            <div class="hero-sequence-step" data-step="1">
+                <p class="hero-sequence-kicker">Experiencia</p>
+                <h2 class="hero-sequence-title">
+                    Más de 35 años de experiencia en auditoría y consultoría nos avalan
+                </h2>
+            </div>
+
+            <div class="hero-sequence-step hero-sequence-step--trust" data-step="2">
+                <p class="hero-sequence-kicker">Confianza</p>
+                <h2 class="hero-sequence-title">
+                    Generamos confianza en la sociedad
+                </h2>
+
+                <div class="hero-sequence-logo-wrap">
+                    <img
+                        src="styles\img\Logo_ADNSbert_Audit.png"
+                        alt="ADN SBERT AUDIT"
+                        class="hero-sequence-logo hero-sequence-logo--medium"
+                    >
+                </div>
+            </div>
+
+            <div class="hero-sequence-step hero-sequence-step--final" data-step="3">
+                <img
+                    src="styles\img\Logo_ADNSbert_Audit.png"
+                    alt="ADN SBERT AUDIT"
+                    class="hero-sequence-logo hero-sequence-logo--large"
+                >
+            </div>
+        </div>
+
+        <div class="hero-sequence-actions">
+            <a href="empresa.html" class="hero-btn hero-btn-primary">Conócenos</a>
+            <a href="servicios.html" class="hero-btn hero-btn-secondary">Servicios</a>
+        </div>
+    </div>
+</section>
+
+<!--
+<section class="band-section reveal-band reveal-left">
+    <a href="empresa.html" class="band-button">CONÓCENOS</a>
+    <div class="band-image">
+        <img src="styles/img/index/banda1.webp" alt="Imagen banda 1">
+    </div>
+    <div class="band-overlay"></div>
+</section>
+
+<section class="band-section reverse reveal-band reveal-right">
+    <a href="contacto.html" class="band-button">CONTÁCTANOS</a>
+    <div class="band-image">
+        <img src="styles/img/index/banda2.jpg" alt="Imagen banda 2">
+    </div>
+    <div class="band-overlay"></div>
+</section>-->
+</main>
+
+<div id="footer"></div>
+
+<script src="js/include.js"></script>
+<script src="js/header.js"></script>
+<script>
+(function(){
+    const canvas = document.getElementById('dnaCanvas');
+    if(!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let w = 0;
+    let h = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let t = 0;
+    let animationId = null;
+    let isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resize(){
+        w = canvas.clientWidth || window.innerWidth;
+        h = canvas.clientHeight || window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function drawWave({
+        amplitude,
+        wavelength,
+        speed,
+        phase,
+        colorA,
+        colorB,
+        yOffset,
+        lineWidth,
+        alpha = 1,
+        glow = true
+    }) {
+        const grad = ctx.createLinearGradient(0, 0, w, 0);
+        grad.addColorStop(0, colorA);
+        grad.addColorStop(1, colorB);
+
+        if (glow) {
+            ctx.lineWidth = lineWidth * 3.2;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.035 * alpha})`;
+            ctx.beginPath();
+            for(let x = 0; x <= w; x += 4){
+                const omega = (x / w) * Math.PI * wavelength;
+                const y = yOffset + Math.sin(omega + phase * speed) * amplitude;
+                if(x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = grad;
+        ctx.globalAlpha = alpha;
+        ctx.beginPath();
+        for(let x = 0; x <= w; x += 2){
+            const omega = (x / w) * Math.PI * wavelength;
+            const y = yOffset + Math.sin(omega + phase * speed) * amplitude;
+            if(x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+    }
+
+    function drawNodes({
+        amplitude,
+        wavelength,
+        speed,
+        phase,
+        yOffset,
+        every = 180,
+        radius = 2.2,
+        color = 'rgba(37,99,235,0.28)'
+    }) {
+        ctx.fillStyle = color;
+
+        for (let x = 40; x < w; x += every) {
+            const omega = (x / w) * Math.PI * wavelength;
+            const y = yOffset + Math.sin(omega + phase * speed) * amplitude;
+
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(x, y, radius * 3.8, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(37,99,235,0.045)';
+            ctx.fill();
+
+            ctx.fillStyle = color;
+        }
+    }
+
+    function render(){
+        ctx.clearRect(0, 0, w, h);
+
+        const baseY = h * 0.68;
+
+        drawWave({
+            amplitude: Math.max(14, h * 0.022),
+            wavelength: 2.1,
+            speed: 0.42,
+            phase: t + 0.4,
+            colorA: 'rgba(160, 205, 255, 0.32)',
+            colorB: 'rgba(70, 130, 220, 0.38)',
+            yOffset: baseY - 36,
+            lineWidth: 1.2,
+            alpha: 0.7
+        });
+
+        drawWave({
+            amplitude: Math.max(22, h * 0.04),
+            wavelength: 1.8,
+            speed: 0.55,
+            phase: t,
+            colorA: 'rgba(120, 180, 255, 0.62)',
+            colorB: 'rgba(25, 95, 190, 0.88)',
+            yOffset: baseY,
+            lineWidth: 2
+        });
+
+        drawWave({
+            amplitude: Math.max(28, h * 0.055),
+            wavelength: 1.45,
+            speed: 0.22,
+            phase: t + 0.8,
+            colorA: 'rgba(55, 125, 210, 0.48)',
+            colorB: 'rgba(12, 58, 130, 0.82)',
+            yOffset: baseY + 8,
+            lineWidth: 1.8,
+            alpha: 0.95
+        });
+
+        drawNodes({
+            amplitude: Math.max(22, h * 0.04),
+            wavelength: 1.8,
+            speed: 0.55,
+            phase: t,
+            yOffset: baseY,
+            every: Math.max(110, Math.floor(w / 8))
+        });
+
+        if (!isReducedMotion) {
+            t += 0.008;
+            animationId = requestAnimationFrame(render);
+        }
+    }
+
+    function start() {
+        if (animationId) cancelAnimationFrame(animationId);
+        render();
+    }
+
+    window.addEventListener('resize', () => {
+        resize();
+        start();
+    });
+
+    resize();
+    start();
+})();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const bands = document.querySelectorAll(".reveal-band");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.9
+    });
+
+    bands.forEach((band) => {
+        observer.observe(band);
+    });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const steps = Array.from(document.querySelectorAll(".hero-sequence-step"));
+    if (!steps.length) return;
+
+    const baseTime = 1200;       // tiempo mínimo (ms)
+    const perWordTime = 320;     // ms por palabra
+    const transitionTime = 900;
+
+    function getStepDuration(step) {
+        const text = step.innerText || "";
+        const words = text.trim().split(/\s+/).length;
+
+        return baseTime + (words * perWordTime);
+    }
+
+    function activateStep(index) {
+        steps.forEach((step, i) => {
+            step.classList.remove("is-active", "is-exit");
+            if (i === index) {
+                step.classList.add("is-active");
+            }
+        });
+    }
+
+    function runSequence(index) {
+        const step = steps[index];
+        activateStep(index);
+
+        const isLast = index === steps.length - 1;
+        if (isLast) return;
+
+        const duration = getStepDuration(step);
+
+        setTimeout(() => {
+            step.classList.remove("is-active");
+            step.classList.add("is-exit");
+
+            setTimeout(() => {
+                step.classList.remove("is-exit");
+                runSequence(index + 1);
+            }, transitionTime);
+
+        }, duration);
+    }
+
+    runSequence(0);
+});
+</script>
+</body>
+</html>

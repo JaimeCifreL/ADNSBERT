@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/header_footer.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Trabaja con nosotros</title>
+    <style>
+        :root {
+            --primary: #002079;
+            --primary-dark: #00185f;
+            --primary-soft: rgba(0, 32, 121, 0.08);
+            --primary-light: rgba(0, 32, 121, 0.04);
+            --white: #ffffff;
+            --text-dark: #172033;
+            --text-light: #5e6a85;
+            --border-soft: rgba(23, 32, 51, 0.08);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.10);
+            --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.05);
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --container: 1200px;
+            --section-space: 110px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text-dark);
+            background:
+                radial-gradient(circle at top left, rgba(0, 32, 121, 0.05), transparent 25%),
+                linear-gradient(180deg, #f8faff 0%, #ffffff 28%, #ffffff 100%);
+        }
+
+        .page-wrapper {
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HERO */
+        .company-section {
+            position: relative;
+            overflow: hidden;
+            min-height: 760px;
+            display: flex;
+            align-items: center;
+            padding: 130px 24px 95px;
+            isolation: isolate;
+        }
+
+        .company-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(100deg, rgba(255, 255, 255, 0.404) 0%, rgba(255, 255, 255, 0.26) 40%, rgba(255, 255, 255, 0.274) 100%),
+                url("styles/img/trabaja_con_nosotros/fondo6.webp") center/cover no-repeat;
+            z-index: -2;
+        }
+
+        .company-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(0, 32, 121, 0.08), transparent 35%),
+                radial-gradient(circle at 85% 75%, rgba(0, 32, 121, 0.18), transparent 30%);
+            z-index: -1;
+        }
+
+        .hero-grid {
+            width: 100%;
+            max-width: var(--container);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(320px, 1.1fr) minmax(300px, 0.9fr);
+            gap: 38px;
+            align-items: center;
+        }
+
+        .hero-left {
+            max-width: 760px;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(0, 32, 121, 0.10);
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            backdrop-filter: blur(8px);
+            margin-bottom: 24px;
+        }
+
+        .hero-kicker::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: inline-block;
+        }
+
+        /* SE MANTIENE EL ESTILO DEL TÍTULO PRINCIPAL */
+        .company-title {
+            position: relative;
+            margin: 0 0 22px;
+            font-size: clamp(2.5rem, 5vw, 4.6rem);
+            line-height: 0.96;
+            letter-spacing: -0.04em;
+            color: var(--primary);
+            font-weight: 800;
+            text-wrap: balance;
+        }
+
+        .hero-description {
+            max-width: 690px;
+            margin: 0 0 32px;
+            font-size: 1.08rem;
+            line-height: 1.85;
+            color: var(--text-dark);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 0 22px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 14px 28px rgba(0, 32, 121, 0.20);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.72);
+            color: var(--primary);
+            border: 1px solid rgba(0, 32, 121, 0.12);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-highlights {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(140px, 1fr));
+            gap: 16px;
+            max-width: 760px;
+        }
+
+        .highlight-card {
+            padding: 18px 18px 16px;
+            border-radius: var(--radius-md);
+            background: rgba(255,255,255,0.72);
+            border: 1px solid rgba(0, 32, 121, 0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .highlight-number {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.03em;
+        }
+
+        .highlight-text {
+            margin: 0;
+            font-size: 0.96rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .hero-right {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .hero-panel {
+            width: 100%;
+            max-width: 430px;
+            padding: 34px;
+            border-radius: var(--radius-xl);
+            background: rgba(255,255,255,0.78);
+            border: 1px solid rgba(0, 32, 121, 0.08);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-panel-label {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .hero-panel h2 {
+            margin: 0 0 14px;
+            font-size: 1.8rem;
+            line-height: 1.15;
+            color: var(--text-dark);
+            letter-spacing: -0.03em;
+        }
+
+        .hero-panel p {
+            margin: 0 0 24px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .hero-panel-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .hero-panel-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: var(--radius-sm);
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+        }
+
+        .hero-panel-item-icon {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-panel-item p {
+            margin: 0;
+            font-size: 0.96rem;
+            line-height: 1.65;
+            color: var(--text-dark);
+        }
+
+        /* SECCIONES GENERALES */
+        .content-section {
+            padding: var(--section-space) 0;
+        }
+
+        .section-head {
+            max-width: 760px;
+            margin-bottom: 48px;
+        }
+
+        .section-kicker {
+            display: inline-block;
+            margin-bottom: 14px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+
+        .section-title {
+            margin: 0 0 16px;
+            font-size: clamp(2rem, 3.2vw, 3rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: var(--text-dark);
+        }
+
+        .section-description {
+            margin: 0;
+            max-width: 720px;
+            font-size: 1.04rem;
+            line-height: 1.85;
+            color: var(--text-light);
+        }
+
+        /* POR QUÉ TRABAJAR AQUÍ */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .benefit-card {
+            height: 100%;
+            padding: 28px 24px;
+            border-radius: var(--radius-lg);
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.24s ease, box-shadow 0.24s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .benefit-icon {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 18px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .benefit-card h3 {
+            margin: 0 0 12px;
+            font-size: 1.18rem;
+            letter-spacing: -0.02em;
+            color: var(--text-dark);
+        }
+
+        .benefit-card p {
+            margin: 0;
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: var(--text-light);
+        }
+
+        /* PROCESO */
+        .process-wrap {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(200px, 1fr));
+            gap: 22px;
+            position: relative;
+        }
+
+        .process-step {
+            position: relative;
+            padding: 28px 24px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .process-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            margin-bottom: 18px;
+            border-radius: 14px;
+            background: var(--primary);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .process-step h3 {
+            margin: 0 0 12px;
+            font-size: 1.12rem;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .process-step p {
+            margin: 0;
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: var(--text-light);
+        }
+
+        /* CANDIDATURA */
+        .apply-section {
+            padding: 0 0 110px;
+        }
+
+        .apply-card {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: minmax(320px, 1fr) minmax(280px, 0.8fr);
+            gap: 28px;
+            align-items: center;
+            padding: 42px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #001c66 0%, #002b8f 100%);
+            color: #ffffff;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .apply-card::before {
+            content: "";
+            position: absolute;
+            right: -60px;
+            top: -60px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.07);
+        }
+
+        .apply-card::after {
+            content: "";
+            position: absolute;
+            left: -40px;
+            bottom: -40px;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .apply-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .apply-card h2 {
+            margin: 0 0 16px;
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            line-height: 1.06;
+            letter-spacing: -0.04em;
+        }
+
+        .apply-card p {
+            margin: 0;
+            max-width: 720px;
+            font-size: 1.02rem;
+            line-height: 1.85;
+            color: rgba(255,255,255,0.84);
+        }
+
+        .apply-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .apply-mail {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 58px;
+            padding: 0 24px;
+            border-radius: 999px;
+            background: #ffffff;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.16);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+            text-align: center;
+        }
+
+        .apply-mail:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(0,0,0,0.20);
+        }
+
+        .apply-note {
+            margin-top: 14px;
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.72);
+        }
+
+        /* ANIMACIONES */
+        .reveal-up,
+        .reveal-fade,
+        .reveal-scale {
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .reveal-up {
+            transform: translateY(40px);
+        }
+
+        .reveal-fade {
+            transform: translateY(20px);
+        }
+
+        .reveal-scale {
+            transform: scale(0.96);
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .delay-1 {
+            transition-delay: 0.12s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.22s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.32s;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .hero-grid,
+            .apply-card {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-right,
+            .apply-actions {
+                justify-content: flex-start;
+            }
+
+            .benefits-grid,
+            .process-wrap {
+                grid-template-columns: repeat(2, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-space: 85px;
+            }
+
+            .company-section {
+                min-height: auto;
+                padding: 105px 18px 76px;
+            }
+
+            .container {
+                padding: 0 18px;
+            }
+
+            .hero-kicker {
+                margin-bottom: 20px;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .hero-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel {
+                padding: 24px;
+            }
+
+            .benefits-grid,
+            .process-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .apply-card {
+                padding: 30px 24px;
+                border-radius: 24px;
+            }
+
+            .company-title {
+                font-size: clamp(2.2rem, 9vw, 3.2rem);
+                margin-bottom: 35px;
+                margin-left: 10px;
+            }
+
+            .company-title::before {
+                content: "|";
+                position: absolute;
+                left: -10px;
+                top: 0;
+                color: #2c6edb;
+                font-weight: 600;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                margin-top: -70px;
+            }
+            .company-title {
+                top: 10px;
+                font-size: clamp(2.2rem, 9vw, 3.2rem);
+                margin-bottom: 35px;
+                margin-left: 10px;
+            }
+
+            .company-title::before {
+                content: "|";
+                position: absolute;
+                left: -10px;
+                top: 0;
+                color: #162a49;
+                font-weight: 600;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+            }
+
+            .apply-mail,
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="header"></div>
+
+<div class="page-wrapper">
+
+    <section class="company-section">
+        <div class="company-bg"></div>
+
+        <div class="hero-grid">
+            <div class="hero-left reveal-up">
+
+                <div class="about-hero">
+                    <h1 class="company-title" style="color:black">
+                        Construye tu futuro con <span style="color:#012c70">nosotros</span>
+                    </h1>
+                </div>
+
+                <p class="hero-description">
+                    En ADNSBERT Audit buscamos personas con talento, criterio y ganas de crecer en un entorno profesional exigente, cercano y en constante evolución. Queremos incorporar perfiles que aporten valor y que también encuentren aquí un lugar donde desarrollarse de verdad, con aprendizaje continuo, responsabilidad y visión a largo plazo.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#candidatura" class="btn-primary">Enviar candidatura</a>
+                    <a href="#por-que-aqui" class="btn-secondary">Descubrir más</a>
+                </div>
+
+                <div class="hero-highlights">
+                    <div class="highlight-card reveal-fade delay-1">
+                        <span class="highlight-number">+Talento</span>
+                        <p class="highlight-text">Buscamos personas con iniciativa, rigor y mentalidad de mejora continua.</p>
+                    </div>
+                    <div class="highlight-card reveal-fade delay-2">
+                        <span class="highlight-number">+Crecimiento</span>
+                        <p class="highlight-text">Impulsamos trayectorias profesionales sólidas en un entorno real de aprendizaje.</p>
+                    </div>
+                    <div class="highlight-card reveal-fade delay-3">
+                        <span class="highlight-number">+Equipo</span>
+                        <p class="highlight-text">Creemos en el trabajo bien hecho, la cercanía y la colaboración diaria.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right reveal-scale delay-1">
+                <div class="hero-panel">
+                    <span class="hero-panel-label">Lo que encontrarás</span>
+                    <h2>Un entorno profesional serio, humano y con proyección.</h2>
+                    <p>
+                        Queremos que cada incorporación sume desde el primer día, pero también que cada persona pueda evolucionar, asumir nuevos retos y construir una carrera estable dentro de la firma.
+                    </p>
+
+                    <div class="hero-panel-list">
+                        <div class="hero-panel-item">
+                            <div class="hero-panel-item-icon">01</div>
+                            <p>Proyectos con responsabilidad, visión técnica y contacto real con clientes.</p>
+                        </div>
+                        <div class="hero-panel-item">
+                            <div class="hero-panel-item-icon">02</div>
+                            <p>Aprendizaje continuo, acompañamiento y desarrollo progresivo.</p>
+                        </div>
+                        <div class="hero-panel-item">
+                            <div class="hero-panel-item-icon">03</div>
+                            <p>Una cultura de trabajo basada en la confianza, el criterio y la calidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="por-que-aqui" class="content-section">
+        <div class="container">
+            <div class="section-head reveal-up">
+                <span class="section-kicker">Por qué trabajar aquí</span>
+                <h2 class="section-title">Más que un puesto, una etapa de crecimiento profesional.</h2>
+                <p class="section-description">
+                    En ADNSBERT Audit entendemos el trabajo como una combinación de exigencia, confianza y evolución. Apostamos por las personas que quieren hacer bien las cosas, crecer con criterio y formar parte de un equipo comprometido con la excelencia.
+                </p>
+            </div>
+
+            <div class="benefits-grid">
+                <article class="benefit-card reveal-up">
+                    <div class="benefit-icon">01</div>
+                    <h3>Desarrollo profesional real</h3>
+                    <p>
+                        Tendrás la oportunidad de aprender de proyectos exigentes, participar activamente en el trabajo del día a día y adquirir experiencia con impacto desde etapas tempranas.
+                    </p>
+                </article>
+
+                <article class="benefit-card reveal-up delay-1">
+                    <div class="benefit-icon">02</div>
+                    <h3>Entorno cercano y profesional</h3>
+                    <p>
+                        Trabajamos desde la cercanía, pero sin renunciar al rigor. Valoramos la comunicación clara, el compromiso y el trabajo en equipo como parte esencial de nuestra forma de trabajar.
+                    </p>
+                </article>
+
+                <article class="benefit-card reveal-up delay-2">
+                    <div class="benefit-icon">03</div>
+                    <h3>Aprendizaje continuo</h3>
+                    <p>
+                        Apostamos por la mejora constante, la actualización técnica y la evolución individual. Queremos que cada persona amplíe sus capacidades y consolide su perfil profesional.
+                    </p>
+                </article>
+
+                <article class="benefit-card reveal-up delay-3">
+                    <div class="benefit-icon">04</div>
+                    <h3>Proyección a largo plazo</h3>
+                    <p>
+                        Nos interesan las incorporaciones con recorrido. Buscamos perfiles que quieran construir una trayectoria sólida dentro de una firma que valora la implicación y el talento.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-head reveal-up">
+                <span class="section-kicker">Cómo es el proceso</span>
+                <h2 class="section-title">Un proceso claro, ágil y centrado en el encaje mutuo.</h2>
+                <p class="section-description">
+                    Queremos conocerte bien, valorar tu perfil con criterio y ofrecerte una experiencia transparente. Nuestro proceso busca identificar no solo conocimientos y experiencia, sino también actitud, capacidad de adaptación y potencial de crecimiento.
+                </p>
+            </div>
+
+            <div class="process-wrap">
+                <article class="process-step reveal-up">
+                    <span class="process-number">1</span>
+                    <h3>Recepción de candidatura</h3>
+                    <p>
+                        Revisamos cada candidatura con atención para entender tu perfil, experiencia, formación y áreas en las que puedes aportar valor a nuestro equipo.
+                    </p>
+                </article>
+
+                <article class="process-step reveal-up delay-1">
+                    <span class="process-number">2</span>
+                    <h3>Primera valoración</h3>
+                    <p>
+                        Analizamos el encaje entre tu perfil y las necesidades del puesto, teniendo en cuenta tanto la parte técnica como la proyección profesional.
+                    </p>
+                </article>
+
+                <article class="process-step reveal-up delay-2">
+                    <span class="process-number">3</span>
+                    <h3>Entrevista personal</h3>
+                    <p>
+                        Mantenemos una conversación para conocerte mejor, hablar sobre tu experiencia, tus motivaciones y resolver cualquier duda sobre el puesto y la firma.
+                    </p>
+                </article>
+
+                <article class="process-step reveal-up delay-3">
+                    <span class="process-number">4</span>
+                    <h3>Incorporación</h3>
+                    <p>
+                        Si existe encaje, avanzamos hacia la incorporación con una integración progresiva, acompañamiento y una visión clara del recorrido esperado.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="candidatura" class="apply-section">
+        <div class="container">
+            <div class="apply-card reveal-scale">
+                <div>
+                    <h2>Envíanos tu candidatura</h2>
+                    <p>
+                        Si crees que tu perfil puede encajar con nuestra forma de trabajar, estaremos encantados de conocerte. Envíanos tu currículum o una breve presentación y valoraremos tu candidatura con atención.
+                    </p>
+                    <p class="apply-note">
+                        Puedes escribirnos directamente y adjuntar la documentación que consideres relevante.
+                    </p>
+                </div>
+
+                <div class="apply-actions">
+                    <a class="apply-mail" href="mailto:rrhh@adnsbertaudit.com?subject=Candidatura%20-%20Trabaja%20con%20nosotros">
+                        rrhh@adnsbertaudit.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div id="footer"></div>
+
+<script src="js/include.js"></script>
+<script src="js/header.js"></script>
+
+<script>
+    const revealElements = document.querySelectorAll('.reveal-up, .reveal-fade, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>

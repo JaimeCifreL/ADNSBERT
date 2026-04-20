@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/header_footer.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Protocolo del Canal Ético</title>
+    <style>
+        .protocol-section {
+            padding: 48px 20px 80px;
+            background:
+                linear-gradient(180deg, #f6f9ff 0%, #ffffff 100%);
+        }
+
+        .protocol-container {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .protocol-hero {
+            max-width: 860px;
+            margin-bottom: 42px;
+        }
+
+        .protocol-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(0, 32, 121, 0.08);
+            color: #002079;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .company-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 0.96;
+            letter-spacing: -0.03em;
+            font-weight: 800;
+            color: #002079;
+            margin: 0 0 18px;
+            max-width: 980px;
+        }
+
+        .protocol-subtitle {
+            font-size: clamp(2rem, 2vw, 4rem);
+            line-height: 0.96;
+            letter-spacing: -0.03em;
+            font-weight: 600;
+            color: #000d31;
+            margin: 0 0 18px;
+            max-width: 980px;
+            text-align: justify;
+        }
+
+        .protocol-intro {
+            font-size: 1.04rem;
+            line-height: 1.82;
+            color: #44506b;
+            margin: 0;
+            max-width: 820px;
+        }
+
+        .protocol-layout {
+            display: grid;
+            grid-template-columns: 290px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .protocol-sidebar {
+            position: sticky;
+            top: 110px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 32, 121, 0.08);
+            border-radius: 22px;
+            padding: 22px 20px;
+            box-shadow: 0 12px 30px rgba(15, 35, 95, 0.08);
+        }
+
+        .protocol-sidebar h3 {
+            margin: 0 0 16px;
+            font-size: 1rem;
+            color: #002079;
+            letter-spacing: -0.01em;
+        }
+
+        .protocol-sidebar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .protocol-sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #4b5873;
+            font-size: 0.96rem;
+            line-height: 1.45;
+            padding: 8px 10px;
+            border-radius: 10px;
+            transition: background 0.22s ease, color 0.22s ease;
+        }
+
+        .protocol-sidebar a:hover {
+            background: rgba(0, 32, 121, 0.06);
+            color: #002079;
+        }
+
+        .protocol-content {
+            display: grid;
+            gap: 24px;
+        }
+
+        .protocol-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 32, 121, 0.08);
+            border-radius: 24px;
+            padding: 30px 30px 28px;
+            box-shadow: 0 12px 30px rgba(15, 35, 95, 0.06);
+        }
+
+        .protocol-card h2 {
+            margin: 0 0 16px;
+            font-size: clamp(1.45rem, 3vw, 2rem);
+            color: #002079;
+            letter-spacing: -0.02em;
+        }
+
+        .protocol-card h3 {
+            margin: 24px 0 12px;
+            font-size: 1.12rem;
+            color: #16357f;
+        }
+
+        .protocol-card p {
+            margin: 0 0 14px;
+            color: #000000;
+            line-height: 1.82;
+            font-size: 1rem;
+        }
+
+        .protocol-card ul,
+        .protocol-card ol {
+            margin: 12px 0 16px 22px;
+            color: #47526d;
+            line-height: 1.78;
+        }
+
+        .protocol-card li + li {
+            margin-top: 8px;
+        }
+
+        .protocol-chapter {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(0, 32, 121, 0.07);
+            color: #002079;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .protocol-note {
+            background: linear-gradient(135deg, rgba(0, 32, 121, 0.05), rgba(0, 32, 121, 0.02));
+            border-left: 4px solid #002079;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin: 18px 0 10px;
+        }
+
+        .protocol-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .protocol-mini-card {
+            background: #f8faff;
+            border: 1px solid rgba(0, 32, 121, 0.06);
+            border-radius: 16px;
+            padding: 16px 18px;
+        }
+
+        .protocol-mini-card strong {
+            color: #002079;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .protocol-list-clean {
+            list-style: none;
+            margin-left: 0 !important;
+            padding-left: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .protocol-list-clean li {
+            background: #f7f9ff;
+            border: 1px solid rgba(0, 32, 121, 0.06);
+            border-radius: 14px;
+            padding: 14px 16px;
+            line-height: 1.7;
+        }
+
+        .protocol-steps {
+            counter-reset: step;
+            list-style: none;
+            margin-left: 0 !important;
+            padding-left: 0;
+            display: grid;
+            gap: 14px;
+        }
+
+        .protocol-steps li {
+            position: relative;
+            padding: 16px 16px 16px 62px;
+            background: #f8faff;
+            border: 1px solid rgba(0, 32, 121, 0.07);
+            border-radius: 16px;
+            line-height: 1.72;
+        }
+
+        .protocol-steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 16px;
+            top: 14px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #002079;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .protocol-links a {
+            color: #002079;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 32, 121, 0.25);
+        }
+
+        .protocol-links a:hover {
+            border-color: #002079;
+        }
+
+        .protocol-meta {
+            display: grid;
+            gap: 14px;
+        }
+
+        .protocol-meta-item {
+            background: #f8faff;
+            border-radius: 16px;
+            padding: 16px 18px;
+            border: 1px solid rgba(0, 32, 121, 0.06);
+        }
+
+        .protocol-meta-item strong {
+            color: #002079;
+        }
+
+        p{
+            text-align: justify;
+        }
+        .protocol-card p {
+            text-align: justify;
+        }
+        .protocol-subtitle {
+            text-align: justify;
+        }
+
+        @media (max-width: 980px) {
+            .protocol-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .protocol-sidebar {
+                position: static;
+            }
+
+            .protocol-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .protocol-section {
+                padding: 30px 14px 60px;
+            }
+
+            .protocol-card {
+                padding: 22px 18px 20px;
+                border-radius: 18px;
+            }
+
+            .company-title {
+                font-size: 2rem;
+            }
+
+            .protocol-steps li {
+                padding-left: 56px;
+            }
+            .company-title {
+                font-size: clamp(2.2rem, 9vw, 3.2rem);
+                margin-bottom: 35px;
+                margin-left: 10px;
+            }
+            .company-title::before {
+                content: "|";
+                position: absolute;
+                left: -10px;
+                top: 0;
+                color: #2c6edb;
+                font-weight: 600;
+            }
+        }
+        .protocol-hero {
+            max-width: 900px;
+            margin: 0 auto 42px;
+            text-align: center;
+        }
+
+        .protocol-hero-extra {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .protocol-subtitle {
+            text-align: center;
+            margin: 0 auto 20px;
+            max-width: 900px;
+            color: rgba(0, 0, 0, 0.575);
+        }
+
+        .protocol-logo {
+            display: block;
+            max-width: 60%;
+            margin: -40px auto 0;
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+<div id="header"></div>
+
+<section class="protocol-section">
+    <div class="protocol-container">
+        <div class="protocol-hero reveal-fade">
+        <h1 class="company-title">Protocolo del Canal de Denuncias</h1>
+
+        <div class="protocol-hero-extra">
+            <h2 class="protocol-subtitle">
+                Protocolo de actuación para el tratamiento de denuncias en el canal ético y de comunicaciones empresarial
+            </h2>
+            <img src="styles/img/protocolo_denuncias/GrupoX3_web-300x212.png" alt="GRUPO X3" class="protocol-logo">
+        </div>
+    </div>
+
+    <div class="protocol-layout">
+        <aside class="protocol-sidebar reveal-up">
+            <h3>Índice</h3>
+            <ul>
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#ambito">Ámbito de aplicación</a></li>
+                <li><a href="#principios">Principios rectores</a></li>
+                <li><a href="#canal">Canal de denuncia disponible</a></li>
+                <li><a href="#externalizacion">Externalización</a></li>
+                <li><a href="#recepcion">Recepción de la denuncia</a></li>
+                <li><a href="#evaluacion">Evaluación preliminar</a></li>
+                <li><a href="#investigacion">Investigación interna</a></li>
+                <li><a href="#resolucion">Resolución</a></li>
+                <li><a href="#proteccion-datos">Protección de datos</a></li>
+                <li><a href="#responsable">Responsable del sistema</a></li>
+                <li><a href="#difusion">Difusión, seguimiento y revisión</a></li>
+                <li><a href="#canales-externos">Canales externos</a></li>
+            </ul>
+        </aside>
+
+        <div class="protocol-content">
+            <article class="protocol-card reveal-up" id="introduccion">
+                <span class="protocol-chapter">Capítulo I · Ámbito, principios y externalización</span>
+                <h2>Introducción</h2>
+                <p>
+                    Este protocolo tiene como finalidad establecer un procedimiento claro, seguro y confidencial para la recepción, gestión, investigación y resolución de denuncias sobre infracciones normativas, éticas o legales, conforme a la Ley 2/2023, de 20 de febrero, reguladora de la protección de las personas que informen sobre infracciones normativas y de lucha contra la corrupción.
+                </p>
+            </article>
+
+            <article class="protocol-card reveal-up delay-1" id="ambito">
+                <h2>Ámbito de aplicación</h2>
+                <p>Este protocolo se aplicará a:</p>
+                <ul class="protocol-list-clean">
+                    <li>Empleados de la empresa.</li>
+                    <li>Proveedores, clientes y terceros vinculados.</li>
+                    <li>Cualquier persona que tenga conocimiento de hechos denunciables en el contexto profesional.</li>
+                </ul>
+            </article>
+
+            <article class="protocol-card reveal-up delay-1" id="principios">
+                <h2>Principios rectores</h2>
+                <p>Los principios que rigen este protocolo son los siguientes:</p>
+
+                <div class="protocol-grid">
+                    <div class="protocol-mini-card">
+                        <strong>Confidencialidad</strong>
+                        Protección de la identidad del informante. Si la comunicación se remite por canales distintos del canal ético o a personal no autorizado, deberá garantizarse igualmente la confidencialidad y su remisión inmediata al Responsable del Sistema.
+                    </div>
+                    <div class="protocol-mini-card">
+                        <strong>Anonimato</strong>
+                        Posibilidad de realizar denuncias sin revelar la identidad de la persona comunicante.
+                    </div>
+                    <div class="protocol-mini-card">
+                        <strong>No represalias</strong>
+                        Garantía de protección frente a cualquier tipo de represalia.
+                    </div>
+                    <div class="protocol-mini-card">
+                        <strong>Imparcialidad</strong>
+                        Investigación objetiva, independiente y justa.
+                    </div>
+                    <div class="protocol-mini-card">
+                        <strong>Diligencia</strong>
+                        Tramitación en plazos razonables y con la debida celeridad.
+                    </div>
+                    <div class="protocol-mini-card">
+                        <strong>Presunción de inocencia y honor</strong>
+                        Respeto a los derechos de las personas afectadas en todas las fases del procedimiento.
+                    </div>
+                </div>
+            </article>
+
+            <article class="protocol-card reveal-up" id="canal">
+                <h2>Canal de denuncia disponible</h2>
+                <p>
+                    La empresa pone a disposición de las personas comunicantes una plataforma digital segura accesible a través del siguiente enlace:
+                </p>
+                <p class="protocol-links">
+                    <a href="https://portal.horax3.com/Denuncias/Report?id=A6n0ShPTpkNOKfbAqpWXMg%3d%3d" target="_blank" rel="noopener">
+                        Portal HORA X3 · Canal ético
+                    </a>
+                </p>
+                <p>
+                    Este canal está integrado en la página web de la empresa, en el pie de la web
+                    <a href="https://www.sbertauditores.com/" target="_blank" rel="noopener">www.sbertauditores.com</a>,
+                    identificado como “Canal ético”.
+                </p>
+
+                <h3>Materias sobre las que pueden formalizarse comunicaciones o denuncias</h3>
+                <p>La siguiente relación tiene carácter enunciativo y no limitativo:</p>
+                <ul>
+                    <li>Contratación pública.</li>
+                    <li>Corrupción.</li>
+                    <li>Derecho a la desconexión digital.</li>
+                    <li>Mercado interior, incluida la defensa de la competencia, normas del impuesto de sociedades o ventajas fiscales relacionadas.</li>
+                    <li>Prevención del blanqueo de capitales o de la financiación del terrorismo.</li>
+                    <li>Protección de la privacidad y de los datos personales.</li>
+                    <li>Protección de las personas consumidoras.</li>
+                    <li>Protección de las personas trabajadoras.</li>
+                    <li>Protección del medio ambiente.</li>
+                    <li>Seguridad de las redes y de los sistemas de información.</li>
+                    <li>Servicios, productos y mercados financieros.</li>
+                    <li>Discriminación de las personas.</li>
+                    <li>Acoso laboral.</li>
+                    <li>Acoso sexual y/o por razón de sexo.</li>
+                </ul>
+            </article>
+
+            <article class="protocol-card reveal-up" id="externalizacion">
+                <h2>Externalización</h2>
+                <p>
+                    ADN SBERT AUDIT S.L. ha externalizado la gestión de la recepción de comunicaciones y denuncias a <strong>Consultancy X3 S.L.</strong>, con NIF <strong>B57899312</strong>, entidad que dispone de una plataforma que incorpora los requerimientos legales exigidos por la Ley 2/2023 y por la Directiva (UE) 2019/1937.
+                </p>
+                <p>
+                    Dicha solución ofrece las garantías adecuadas de respeto a la independencia, la confidencialidad, la protección de datos y el secreto de las comunicaciones.
+                </p>
+
+                <h3>Responsabilidad del receptor</h3>
+                <ul>
+                    <li>Consultancy X3 S.L. actúa como <strong>Encargado del tratamiento</strong> a efectos de la normativa de protección de datos, existiendo el correspondiente contrato de encargo.</li>
+                    <li>La entidad certifica que únicamente tendrán acceso a la plataforma dos personas: una titular y una suplente en caso de incapacidad, vacaciones u otras circunstancias equivalentes.</li>
+                    <li>Las personas autorizadas disponen de conocimientos suficientes tanto sobre el uso de la plataforma como sobre la normativa de protección a la persona comunicante.</li>
+                    <li>Sus funciones se limitan a la recepción de la comunicación o denuncia y su traslado inmediato al Responsable del Sistema Interno de la empresa.</li>
+                </ul>
+
+                <div class="protocol-note">
+                    <p>
+                        Consultancy X3 S.L. no estará autorizada, con carácter general, a contactar con la persona comunicante en relación con la denuncia recibida, salvo en supuestos de error informático o de uso del formulario que impidan el correcto traslado de la comunicación, siempre previa comunicación de la anomalía y con autorización expresa del Responsable del Sistema Interno.
+                    </p>
+                </div>
+
+                <p>
+                    La gestión del sistema interno de información por un tercero no supondrá, en ningún caso, un menoscabo de las garantías y requisitos establecidos en la Ley 2/2023, ni una atribución de la responsabilidad sobre el sistema a una persona distinta del Responsable del Sistema Interno de la empresa.
+                </p>
+            </article>
+
+            <article class="protocol-card reveal-up" id="recepcion">
+                <span class="protocol-chapter">Capítulo II · Gestión de la comunicación y/o denuncia</span>
+                <h2>Recepción de la denuncia</h2>
+                <p>Al recibir una denuncia, se actuará conforme a las siguientes pautas:</p>
+
+                <ol class="protocol-steps">
+                    <li>Se confirmará la recepción al denunciante en el plazo máximo de siete días naturales desde la recepción de la comunicación. En el caso de comunicaciones realizadas a través de la plataforma, la confirmación se comunica de forma automática e inmediata.</li>
+                    <li>Si la denuncia fuera anónima, la persona comunicante podrá realizar el seguimiento de la tramitación mediante el número de referencia que aparecerá en pantalla en el momento de la comunicación.</li>
+                    <li>La denuncia se registrará de forma segura en el sistema interno.</li>
+                    <li>Se realizará una evaluación preliminar para determinar la competencia del canal.</li>
+                    <li>Se garantizará la confidencialidad cuando la comunicación se remita por canales distintos de los establecidos o a personal no responsable de su tratamiento, que deberá remitirla inmediatamente al Responsable del Sistema.</li>
+                </ol>
+            </article>
+
+            <article class="protocol-card reveal-up" id="evaluacion">
+                <h2>Evaluación preliminar</h2>
+                <ul class="protocol-list-clean">
+                    <li>Se verificará la suficiencia de la información aportada.</li>
+                    <li>Se determinará si procede iniciar investigación.</li>
+                    <li>Se derivará a otras áreas si la materia no corresponde al canal.</li>
+                </ul>
+
+                <h3>Actuación en caso de insuficiencia de información</h3>
+                <p>
+                    Si la información contenida en la comunicación o denuncia fuera insuficiente para proceder a una investigación, se podrá mantener comunicación con la persona informante a través de la propia plataforma y, si se considera necesario, solicitar información adicional.
+                </p>
+            </article>
+
+            <article class="protocol-card reveal-up" id="investigacion">
+                <h2>Investigación interna</h2>
+                <p>La investigación incluirá, entre otras, las siguientes actuaciones:</p>
+                <ul>
+                    <li>Designación de un equipo investigador independiente.</li>
+                    <li>Recopilación de pruebas: documentos, entrevistas y registros.</li>
+                    <li>Garantía de los derechos del denunciante y de la persona denunciada.</li>
+                    <li>Elaboración de un informe con conclusiones preliminares.</li>
+                </ul>
+
+                <p>
+                    Se reconoce expresamente el derecho de la persona afectada a ser informada de las acciones u omisiones que se le atribuyen y a ser oída en cualquier momento. Dicha comunicación tendrá lugar en el tiempo y forma que se consideren adecuados para garantizar el buen fin de la investigación.
+                </p>
+
+                <h3>Determinación del plazo de resolución</h3>
+                <p>
+                    El plazo máximo para dar respuesta a las actuaciones de investigación no podrá ser superior a <strong>tres meses</strong> desde la recepción de la comunicación, salvo casos de especial complejidad que requieran ampliación, en cuyo caso podrá extenderse hasta un máximo de <strong>otros tres meses adicionales</strong>.
+                </p>
+                <p>
+                    En los casos de discriminación de las personas, acoso laboral y acoso sexual y/o por razón de sexo, se estará a lo dispuesto en la normativa específica aplicable en relación con los plazos de resolución.
+                </p>
+            </article>
+
+            <article class="protocol-card reveal-up" id="resolucion">
+                <h2>Resolución</h2>
+                <p>
+                    Finalizada la investigación, se elaborará un informe final con las medidas propuestas, que podrán consistir en una o varias de las siguientes:
+                </p>
+                <ul class="protocol-list-clean">
+                    <li>Medidas correctivas.</li>
+                    <li>Medidas disciplinarias, incluido el despido disciplinario si concurriera causa.</li>
+                    <li>Medidas preventivas.</li>
+                </ul>
+
+                <p>
+                    La resolución se comunicará al denunciante, cuando proceda, y quedará registrada en el sistema.
+                </p>
+                <p>
+                    La información se remitirá de forma inmediata al Ministerio Fiscal cuando los hechos pudieran ser indiciariamente constitutivos de delito. Si los hechos afectasen a los intereses financieros de la Unión Europea, la remisión se realizará a la Fiscalía Europea.
+                </p>
+            </article>
+
+            <article class="protocol-card reveal-up" id="proteccion-datos">
+                <span class="protocol-chapter">Capítulo III · Otras disposiciones</span>
+                <h2>Protección de datos</h2>
+                <p>
+                    El tratamiento de datos se realiza conforme al RGPD y a la LOPDGDD. Los datos se conservan durante el tiempo legalmente establecido y el acceso queda restringido exclusivamente a la persona o personas autorizadas por el Responsable del Sistema Interno de Información de la empresa.
+                </p>
+            </article>
+
+            <article class="protocol-card reveal-up" id="responsable">
+                <h2>Responsable colegiado del Sistema Interno de Información</h2>
+                <p>
+                    ADN SBERT AUDIT S.L. nombra Responsables del Sistema Interno de Información a:
+                </p>
+                <ul>
+                    <li><strong>D. Jaume Riutort Crespí</strong>, DNI 43048343W, en calidad de directivo con responsabilidad de Administrador solidario.</li>
+                    <li><strong>Dña. María Antonia Company Carrió</strong>, DNI 43141587G.</li>
+                    <li><strong>D. José María Calado del Moral</strong>, DNI 18214786M, como experto externo.</li>
+                </ul>
+
+                <p>
+                    El nombramiento ha sido notificado a la A.I.P.I. de acuerdo con los procedimientos de notificación establecidos por dicho organismo.
+                </p>
+
+                <div class="protocol-note">
+                    <p>
+                        El Responsable del Sistema desarrollará sus funciones de forma independiente y autónoma respecto del resto de los órganos de la entidad, no podrá recibir instrucciones de ningún tipo en su ejercicio y deberá disponer de todos los medios personales y materiales necesarios para desempeñarlas.
+                    </p>
+                </div>
+            </article>
+
+            <article class="protocol-card reveal-up" id="difusion">
+                <h2>Difusión del protocolo</h2>
+                <p>
+                    El protocolo se publica internamente en la intranet corporativa, si la hubiera, en el tablón de anuncios de la empresa o se distribuye a todas las personas empleadas a través del correo electrónico.
+                </p>
+
+                <h3>Seguimiento y revisión</h3>
+                <p>
+                    Se realizan auditorías internas periódicas, revisión anual del protocolo y su actualización conforme a cambios normativos.
+                </p>
+            </article>
+
+            <article class="protocol-card reveal-up" id="canales-externos">
+                <h2>Canales externos de información ante las autoridades competentes</h2>
+                <p class="protocol-links">
+                    <a href="https://www.proteccioninformante.gob.es/" target="_blank" rel="noopener">
+                        https://www.proteccioninformante.gob.es/
+                    </a>
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<div id="footer"></div>
+
+<script src="js/include.js"></script>
+<script src="js/header.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const animatedItems = document.querySelectorAll(".reveal-up, .reveal-fade, .reveal-scale");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.18
+    });
+
+    animatedItems.forEach((item) => {
+        observer.observe(item);
+    });
+});
+</script>
+</body>
+</html>
