@@ -26,22 +26,12 @@ main {
     justify-content: flex-start;
     overflow: hidden;
     padding: 56px 24px 72px;
-    background-image: linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url('img/index/portada.jpg');
+    background-image: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), url('img/index/portada.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(circle at 18% 30%, rgba(37, 100, 235, 0.068), transparent 30%),
-        radial-gradient(circle at 82% 72%, rgba(37, 100, 235, 0.068), transparent 26%);
-    z-index: 1;
-}
 
 #dnaCanvas {
     position: absolute;
@@ -403,7 +393,7 @@ main {
     overflow: hidden;
     padding: 56px 24px 72px;
     background-image:
-        linear-gradient(rgba(255,255,255,0.58), rgba(255,255,255,0.58)),
+        linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
         url('img/index/portada.jpg');
     background-size: cover;
     background-position: center;
