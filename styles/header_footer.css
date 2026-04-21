@@ -372,10 +372,9 @@
     background:
         radial-gradient(circle at 14% 18%, rgba(37, 99, 235, 0.07), transparent 25%),
         radial-gradient(circle at 82% 76%, rgba(37, 99, 235, 0.05), transparent 24%),
-        linear-gradient(to bottom, #f8fbff 0%, #eef4fb 100%);
+        linear-gradient(to bottom, #444444 0%, #5a5c5e 100%);
     padding: 38px 20px 34px;
 }
-
 .footer-main-content {
     max-width: 1180px;
     margin: 0 auto;
