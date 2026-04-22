@@ -57,7 +57,34 @@ window.addEventListener("DOMContentLoaded", async () => {
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('Service Worker registrado:', reg.scope))
+                    .then(reg => {
+                        console.log('Service Worker registrado:', reg.scope);
+
+                        // Si ya hay un SW en espera, pedir que se active
+                        if (reg.waiting) {
+                            reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+                        }
+
+                        // Cuando se detecta una nueva instalación, pedir activación
+                        reg.addEventListener('updatefound', () => {
+                            const installing = reg.installing;
+                            if (!installing) return;
+                            installing.addEventListener('statechange', () => {
+                                if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // Hay una nueva versión: solicitar activación inmediata
+                                    installing.postMessage({ type: 'SKIP_WAITING' });
+                                }
+                            });
+                        });
+
+                        // Cuando el nuevo SW toma el control, recargar la página para aplicar assets nuevos
+                        navigator.serviceWorker.addEventListener('controllerchange', () => {
+                            window.location.reload();
+                        });
+
+                        // Solicitar comprobación de actualización al registrar
+                        reg.update();
+                    })
                     .catch(err => console.warn('Registro SW falló:', err));
             });
         }
