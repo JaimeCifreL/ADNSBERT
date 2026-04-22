@@ -28,20 +28,53 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim());
 });
 
+// Permitir que la página solicite activación inmediata
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
+// Estrategia: network-first para HTML/CSS/JS (fuerza actualización), cache-first para imágenes y recursos estáticos
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
+  const req = event.request;
+  const url = new URL(req.url);
+
+  // Network-first for navigation and core assets (html, css, js)
+  const isNavOrCore = req.destination === 'document' || req.mode === 'navigate' ||
+    req.destination === 'script' || req.destination === 'style' ||
+    url.pathname.endsWith('.html') || url.pathname.endsWith('.css') || url.pathname.endsWith('.js');
+
+  if (isNavOrCore) {
+    event.respondWith(
+      fetch(req)
         .then((response) => {
-          // Guardar en cache la respuesta obtenida
-          const resClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
+          try {
+            const resClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+          } catch (e) {}
           return response;
         })
-        .catch(() => caches.match('index.html'));
+        .catch(() => caches.match(req).then((cached) => cached || caches.match('index.html')))
+    );
+    return;
+  }
+
+  // Cache-first for other resources (images, fonts, etc.)
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      if (cached) return cached;
+      return fetch(req)
+        .then((response) => {
+          try {
+            const resClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+          } catch (e) {}
+          return response;
+        })
+        .catch(() => {});
     })
   );
 });
