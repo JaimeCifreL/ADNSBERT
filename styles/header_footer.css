@@ -1,711 +1,138 @@
-/* ===== HEADER BASE ===== */
-.site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-
-    background: linear-gradient(135deg, #071e49, #0a387e);
-    color: white;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-
-    transition:
-        background 0.35s ease,
-        box-shadow 0.35s ease,
-        padding 0.35s ease,
-        min-height 0.35s ease,
-        transform 0.35s ease;
-}
-
-.site-header.hidden {
-    transform: translateY(-100%);
-}
-
-.header-container {
-    max-width: 100%;
-    margin: 0 auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* logo pegado a la izquierda dentro del contenedor */
-
-    padding: 5px 38px;
-    transition: padding 0.35s ease;
-}
-
-/* logo */
-.logo {
-    font-size: 1.45rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    transition:
-        font-size 0.35s ease,
-        transform 0.35s ease;
-}
-
-/* make logo image fit header and be responsive */
-.logo img {
-    max-height: 34px;
-    width: auto;
-    display: block;
-}
-
-.adngrm-logo {
-    font-size: 1.45rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    transition:
-        font-size 0.35s ease,
-        transform 0.35s ease;
-}
-
-.adngrm-logo img {
-    max-height: 34px;
-    width: auto;
-    display: block;
-}
-
-.adngrm-logo {
-    margin-left: auto;
-    order: 1;
-}
-
-.nav {
-    order: 0;
-}
-
-/* nav */
-.nav {
-    display: flex;
-    gap: 38px;
-    align-items: center;
-    transition: gap 0.35s ease;
-}
-
-.nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 0.96rem;
-    font-weight: 500;
-    position: relative;
-    transition:
-        opacity 0.25s ease,
-        font-size 0.35s ease;
-}
-
-.nav a:hover {
-    opacity: 0.85;
-}
-
-.nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 2px;
-    background: white;
-    transition: width 0.3s ease;
-}
-
-.nav a:hover::after {
-    width: 100%;
-}
-
-.mobile-menu-toggle {
-    display: none;
-}
-
-.site-header {
-    transition:
-        background 0.35s ease,
-        box-shadow 0.35s ease,
-        padding 0.35s ease,
-        min-height 0.35s ease,
-        transform 0.35s ease;
-}
-
-/* ===== HEADER AL HACER SCROLL ===== */
-.site-header.scrolled {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-    background: linear-gradient(135deg, #04122c, #092958);
-}
-
-.site-header.scrolled .header-container {
-    padding: 8px 18px;
-}
-
-.site-header.scrolled .logo {
-    font-size: 1.1rem;
-    transform: scale(0.98);
-}
-
-.site-header.scrolled .logo img {
-    max-height: 40px;
-}
-
-.site-header.scrolled .nav {
-    gap: 14px;
-}
-
-.site-header.scrolled .nav a {
-    font-size: 0.88rem;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-    .header-container {
-        flex-direction: column;
-        gap: 12px;
-        padding: 16px 18px;
-    }
-
-    .nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 14px;
-    }
-
-    .site-header.scrolled .header-container {
-        padding: 10px 18px;
-    }
-}
-
-/* ===== MOBILE: menu toggle & better tap targets (only affects small screens) ===== */
-@media (max-width: 900px) {
-    .header-container {
-        align-items: center;
-    }
-
-    .adngrm-logo {
-            display: none;
-    }
-
-    /* en móvil, restablecer orden y margen para que apilen correctamente */
-    .logo {
-        margin-left: 0;
-        order: 0;
-    }
-
-    .mobile-menu-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        border: 2px solid rgba(255,255,255,0.12);
-        color: white;
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-left: auto;
-        flex-shrink: 0;
-    }
-
-    /* hide desktop horizontal nav by default on mobile, show only when .nav-open */
-    .nav {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 8px;
-    }
-
-    .site-header.nav-open .nav {
-        display: flex;
-    }
-
-    .nav a {
-        display: block;
-        width: 100%;
-        padding: 12px 12px;
-        text-align: left;
-        background: rgba(255,255,255,0.03);
-        border-radius: 8px;
-        font-size: 1rem;
-        box-shadow: none;
-    }
-
-    .logo {
-        order: 0;
-    }
-
-    /* make footer CTA touch friendly on small screens */
-    .footer-cta-content {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 18px;
-    }
-
-    .footer-cta-button {
-        width: 100%;
-        min-width: unset;
-        height: 56px;
-        border-radius: 12px;
-    }
-}
-
-/* ===== FOOTER ===== */
-.site-footer {
-    position: relative;
-    width: 100%;
-    color: #0f172a;
-    font-family: Arial, sans-serif;
-    background: #0b1220;
-    overflow: hidden;
-}
-
-/* ===== CTA SUPERIOR ===== */
-.footer-cta {
-    position: relative;
-    background:
-        radial-gradient(circle at 12% 30%, rgba(255,255,255,0.08), transparent 26%),
-        radial-gradient(circle at 85% 70%, rgba(255,255,255,0.06), transparent 28%),
-        linear-gradient(135deg, #0f3f96 0%, #1d63cf 100%);
-    padding: 28px 20px;
-    overflow: hidden;
-}
-
-.footer-cta::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        120deg,
-        transparent 0%,
-        rgba(255,255,255,0.08) 35%,
-        transparent 65%
-    );
-    transform: translateX(-100%);
-    animation: footerShine 7s ease-in-out infinite;
-    pointer-events: none;
-}
-
-.footer-cta-content {
-    position: relative;
-    z-index: 1;
-    max-width: 1180px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-}
-
-.footer-eyebrow {
-    display: inline-block;
-    margin-bottom: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.72);
-}
-
-.footer-cta-text h2 {
-    margin: 0 0 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(1.8rem, 2.8vw, 2.7rem);
-    font-weight: 300;
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-    color: #ffffff;
-}
-
-.footer-cta-text p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.84);
-    max-width: 640px;
-}
-
-.footer-cta-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-width: 220px;
-    min-height: 52px;
-    padding: 0 24px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.96);
-    color: #0f172a;
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.28);
-    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16);
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background-color 0.25s ease;
-}
-
-.footer-cta-button svg {
-    width: 17px;
-    height: 17px;
-    transition: transform 0.25s ease;
-}
-
-.footer-cta-button:hover {
-    transform: translateY(-2px);
-    background: #ffffff;
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.22);
-}
-
-.footer-cta-button:hover svg {
-    transform: translateX(3px);
-}
-
-/* ocultar CTA en contacto */
-.contact-page .footer-cta {
-    display: none !important;
-}
-
-/* ===== ZONA PRINCIPAL ===== */
-.footer-main {
-    position: relative;
-    background:
-        radial-gradient(circle at 14% 18%, rgba(37, 99, 235, 0.07), transparent 25%),
-        radial-gradient(circle at 82% 76%, rgba(37, 99, 235, 0.05), transparent 24%),
-        linear-gradient(to bottom, #444444 0%, #5a5c5e 100%);
-    padding: 38px 20px 34px;
-}
-
-.footer-main-content {
-    max-width: 1180px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.15fr 0.95fr 1fr;
-    gap: 24px;
-    align-items: stretch;
-}
-
-/* ===== TARJETAS BASE ===== */
-.footer-brand-card,
-.footer-services-card,
-.footer-contact-card {
-    position: relative;
-    border-radius: 24px;
-    overflow: hidden;
-    transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease,
-        border-color 0.28s ease;
-}
-
-.footer-brand-card:hover,
-.footer-services-card:hover,
-.footer-contact-card:hover {
-    transform: translateY(-4px);
-}
-
-/* ===== TARJETA LOGOS ===== */
-.footer-brand-card {
-    background: rgba(255,255,255,0.88);
-    border: 1px solid rgba(15, 23, 42, 0.07);
-    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.05);
-    padding: 28px 26px;
-}
-
-.footer-brand-logos {
-    display: grid;
-    gap: 18px;
-    margin: 10px 0 20px;
-}
-
-.footer-brand-logos img {
-    max-width: 240px;
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: saturate(1) contrast(1.02);
-}
-
-.footer-brand-text {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: #475569;
-    max-width: 460px;
-}
-
-/* ===== TARJETA SERVICIOS ===== */
-.footer-services-card {
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(15, 23, 42, 0.06);
-    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.04);
-    padding: 28px 26px;
-}
-
-.footer-services-card h3,
-.footer-contact-card h3 {
-    margin: 0 0 18px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.45rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-}
-
-.footer-mini-title {
-    display: inline-block;
-    margin-bottom: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #2563eb;
-}
-
-.footer-mini-title--light {
-    color: rgba(255,255,255,0.72);
-}
-
-.footer-services-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 12px;
-}
-
-.footer-services-list li {
-    position: relative;
-    padding-left: 18px;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: #334155;
-}
-
-.footer-services-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.72em;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2563eb, #60a5fa);
-    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.08);
-}
-
-/* ===== TARJETA CONTACTO DESTACADA ===== */
-.footer-contact-card {
-    background:
-        radial-gradient(circle at 14% 22%, rgba(255,255,255,0.10), transparent 26%),
-        radial-gradient(circle at 82% 76%, rgba(255,255,255,0.07), transparent 24%),
-        linear-gradient(145deg, #0f172a 0%, #111c34 45%, #16345f 100%);
-    color: #ffffff;
-    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.18);
-    padding: 28px 26px;
-}
-
-.footer-contact-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 110px;
-    height: 110px;
-    background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%);
-    pointer-events: none;
-}
-
-.footer-contact-list {
-    display: grid;
-    gap: 16px;
-}
-
-.footer-contact-item {
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.10);
-}
-
-.footer-contact-item:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-}
-
-.footer-contact-label {
-    display: inline-block;
-    margin-bottom: 6px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.62);
-}
-
-.footer-contact-item p,
-.footer-contact-item a {
-    margin: 0;
-    font-size: 0.98rem;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.94);
-    text-decoration: none;
-}
-
-.footer-contact-item a:hover {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-.footer-contact-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 22px;
-    min-height: 46px;
-    width: fit-content;
-    padding: 0 22px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.94rem;
-    font-weight: 600;
-    background: rgba(255,255,255,0.96);
-    color: #0f172a;
-    transition:
-        transform 0.2s ease,
-        background-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.footer-contact-button:hover {
-    transform: translateY(-1px);
-    background: #ffffff;
-    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
-}
-
-/* ===== FRANJA INFERIOR ===== */
-.footer-bottom {
-    background: #0a0f1a;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 20px;
-}
-
-.footer-bottom-inner {
-    max-width: 1180px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    flex-wrap: wrap;
-}
-
-.footer-bottom p {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.68);
-}
-
-.footer-legal-links {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-}
-
-.footer-legal-links a {
-    color: rgba(255,255,255,0.86);
-    text-decoration: none;
-    transition: color 0.2s ease, opacity 0.2s ease;
-}
-
-.footer-legal-links a:hover {
-    color: #ffffff;
-}
-
-.footer-legal-links span {
-    color: rgba(255,255,255,0.34);
-}
-
-/* ===== ANIMACIÓN SUTIL ===== */
-@keyframes footerShine {
-    0% {
-        transform: translateX(-120%);
-    }
-    20% {
-        transform: translateX(120%);
-    }
-    100% {
-        transform: translateX(120%);
-    }
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 980px) {
-    .footer-main-content {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-contact-card {
-        order: -1;
-    }
-
-    .footer-cta-content {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-@media (max-width: 768px) {
-    .footer-cta {
-        padding: 24px 16px;
-    }
-
-    .footer-main {
-        padding: 26px 16px 24px;
-    }
-
-    .footer-brand-card,
-    .footer-services-card,
-    .footer-contact-card {
-        padding: 22px 18px;
-        border-radius: 18px;
-    }
-
-    .footer-cta-button,
-    .footer-contact-button {
-        width: 100%;
-    }
-
-    .footer-bottom {
-        padding: 18px 16px;
-    }
-
-    .footer-bottom-inner {
-        align-items: flex-start;
-    }
-
-    .footer-legal-links {
-        gap: 6px;
-    }
-
-    .footer-brand-logos img {
-        max-width: 220px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .footer-cta::before,
-    .footer-brand-card,
-    .footer-services-card,
-    .footer-contact-card,
-    .footer-cta-button,
-    .footer-contact-button {
-        animation: none;
-        transition: none;
-    }
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/css.css">
+    <link rel="stylesheet" href="styles/header_footer.css">
+    <title>Contacto</title>
+
+    
+</head>
+<body class="contact-page">
+<div id="header"></div>
+
+<section class="company-section">
+    <div class="company-bg"></div>
+
+    <div class="company-container">
+        <div class="contact-hero reveal-fade">
+            <h2 class="company-title">CONTACTO</h2>
+           
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-left reveal-up">
+                <h3 class="contact-main-title">Habla con nosotros</h3>
+
+                <div class="contact-list">
+                    <article class="contact-block reveal-up delay-1">
+                        <div class="contact-icon-wrap" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.11 4.18 2 2 0 0 1 4.09 2h3a2 2 0 0 1 2 1.72c.12.9.37 1.78.72 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.47-1.27a2 2 0 0 1 2.11-.45c.83.35 1.71.6 2.61.72A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-block-text">
+                            <h4 class="contact-subtitle">Teléfono</h4>
+                            <p class="contact-item">
+                                <a class="contact-link" href="tel:+34971000000">+34 971 000 000</a>
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="contact-block reveal-up delay-2">
+                        <div class="contact-icon-wrap" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                                <polyline points="3,7 12,13 21,7"/>
+                            </svg>
+                        </div>
+                        <div class="contact-block-text">
+                            <h4 class="contact-subtitle">Correo electrónico</h4>
+                            <p class="contact-item">
+                                <a class="contact-link" href="mailto:auditoria@sbertauditores.com">auditoria@sbertauditores.com</a>
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="contact-block reveal-up delay-2">
+                        <div class="contact-icon-wrap" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64" fill="currentColor" aria-label="LinkedIn">
+                                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.34 10.07H5.67V18H8.34V10.07ZM7 5.8A1.55 1.55 0 1 0 7 8.9A1.55 1.55 0 1 0 7 5.8ZM18.33 13.16C18.33 10.78 17.06 9.67 15.36 9.67C13.99 9.67 13.38 10.42 13.04 10.95V10.07H10.37C10.4 10.65 10.37 18 10.37 18H13.04V13.57C13.04 13.33 13.06 13.08 13.13 12.91C13.31 12.42 13.73 11.91 14.43 11.91C15.35 11.91 15.72 12.61 15.72 13.63V18H18.33V13.16Z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-block-text">
+                            <h4 class="contact-subtitle">LinkedIn</h4>
+                            <p class="contact-item">
+                                <a class="contact-link" href="https://es.linkedin.com/company/adn-sbert-audit" target="_blank" rel="noopener noreferrer">ADN SBERT AUDIT SL</a>
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="contact-right reveal-scale">
+                <aside class="location-card">
+                    <div>
+                        <div class="location-top">
+                            <div class="location-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 6-9 11-9 11s-9-5-9-11a9 9 0 1 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="location-label">Oficina</p>
+                                <h3 class="location-title">Ubicación</h3>
+                            </div>
+                        </div>
+
+                        <div class="location-address">
+                            <p class="location-line">C/ Francisco Rover, 6, 2.ª</p>
+                            <p class="location-line">07003 Palma de Mallorca, España</p>
+                        </div>
+
+                        <a class="location-map-link" href="#" aria-label="Ver ubicación en el mapa">
+                            Ver en el mapa
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17 17 7"/>
+                                <path d="M8 7h9v9"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <p class="location-note">
+                        Puedes ponerte en contacto con nosotros previamente para concertar una visita o reunión personalizada.
+                    </p>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="footer"></div>
+
+<script src="js/include.js"></script>
+<script src="js/header.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const animatedItems = document.querySelectorAll(".reveal-up, .reveal-fade, .reveal-scale");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.18
+    });
+
+    animatedItems.forEach((item) => {
+        observer.observe(item);
+    });
+});
+</script>
+</body>
+</html>
